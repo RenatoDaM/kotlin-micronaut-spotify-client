@@ -1,4 +1,4 @@
 package com.example.auth
 
-class RequestUserAuthorization {
+class equestUserAuthorization {
 }
