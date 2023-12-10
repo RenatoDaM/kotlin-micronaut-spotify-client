@@ -26,6 +26,7 @@ dependencies {
     implementation("io.micronaut.views:micronaut-views-thymeleaf")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
+    runtimeOnly("org.yaml:snakeyaml")
 }
 
 
@@ -33,7 +34,7 @@ application {
     mainClass.set("com.example.ApplicationKt")
 }
 java {
-    sourceCompatibility = JavaVersion.toVersion("17")
+    sourceCompatibility = JavaVersion.toVersion("21")
 }
 
 

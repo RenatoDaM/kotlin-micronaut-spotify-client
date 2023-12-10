@@ -3,9 +3,9 @@ micronaut:
     name: "spotify"
 
 spotify:
-  id: ""
-  secret: ""
-  callback: "http://localhost:8080"
+  id: "caa2de5bb36d4e8fb6f942f3aa0d5c70"
+  secret: "2362b802cea949798a8147083c06cab2"
+  callback: "http://localhost:8080/callback"
 
 redis:
   uri: redis://localhost:6379
