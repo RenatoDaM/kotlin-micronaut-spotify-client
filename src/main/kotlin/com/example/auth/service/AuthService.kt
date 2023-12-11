@@ -5,15 +5,10 @@ import com.example.auth.request.TokenResponse
 import com.example.client.SpotifyClient
 import com.example.exception.TokenNotFoundException
 import io.micronaut.context.annotation.Value
-import io.micronaut.core.annotation.NonNull
-import io.micronaut.http.HttpResponse
-import io.micronaut.http.MutableHttpResponse
-import io.micronaut.http.annotation.Get
-import io.micronaut.http.annotation.QueryValue
 import io.micronaut.http.uri.UriBuilder
-import io.micronaut.views.View
 import jakarta.inject.Singleton
 import java.net.URI
+import java.util.*
 import kotlin.random.Random
 
 @Singleton
@@ -28,11 +23,6 @@ class AuthService (
     @Value("\${spotify.basic}")
     private val  basic: String
 ) {
-
-    private var token: String? = null
-    private var refreshToken: String? = null
-
-
     fun doLogin(): URI {
         val state = generateRandomString(16)
         val authorizeUri = UriBuilder.of("https://accounts.spotify.com/authorize")
@@ -46,24 +36,16 @@ class AuthService (
         return authorizeUri
     }
 
-    fun handleCallback(code: String,state: String?): Any {
+    fun handleCallback(code: String, state: String?): TokenResponse {
         // FOR DEBUG PURPOSE I PREFERED BLOCKING, BUT LATER ON I WILL CHANGE
         val tokenRequest = TokenRequest("authorization_code",code, "http://localhost:8080/callback")
         // need to implement state comparison
         val response: TokenResponse = spotifyClient.requestToken(basic, tokenRequest)
-        token = response.access_token
-        refreshToken = response.refresh_token
         return response
     }
 
-
-
-    fun getUser(): Any {
-        val myToken = token
-        if (token.isNullOrEmpty()) {
-            throw TokenNotFoundException()
-        }
-        return spotifyClient.getUser("Bearer " + myToken!!)
+    fun getUser(token: String): Any {
+        return spotifyClient.getUser("Bearer $token")
     }
 
     // ONLY FOR TEST PURPOSE, PLEASE USE A BETTER RANDOM STRING ALGORITHM

@@ -25,6 +25,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("io.micronaut.views:micronaut-views-thymeleaf")
+    implementation("io.micronaut.session:micronaut-session")
+    implementation("io.micronaut.redis:micronaut-redis-lettuce:2.2.0")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.yaml:snakeyaml")
