@@ -5,6 +5,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.2.0"
     id("io.micronaut.aot") version "4.2.0"
+    id ("org.jetbrains.kotlin.plugin.noarg") version "1.9.21"
 }
 
 version = "0.1"
@@ -37,6 +38,9 @@ java {
     sourceCompatibility = JavaVersion.toVersion("21")
 }
 
+noArg {
+    annotation("com.example.annotation.NoArgsConstructor")
+}
 
 graalvmNative.toolchainDetection.set(false)
 micronaut {
