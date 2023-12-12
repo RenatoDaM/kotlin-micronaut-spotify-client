@@ -12,17 +12,25 @@ Anyway it was a learning experience about sessions, tokens, cookies and redis.
 So I used Micronaut Session, making it stateful with redis. Every requisition has in cookies an "UUID like" string, 
 this string is basic 64 coded, we decode it in the backend and get user's sessions based in the key value from it.
 
-So we can store sessions in this way, but probably you don't want to store JWT tokens like I did,
-because make it stateful and have no reason, if you want something stateful, you don't have to use
-tokens.
+So, we can store sessions in this way, but you probably don't want to store JWT tokens like I did,
+because make it stateful (and we use JWT because stateless characteristic) and in the most cases, we have no reason to it.
+
+No problem with stateful. The problem is the way that I implemented, making it redundant and contradictory
 
 Redis storing session:
 
 
 ![img.png](img.png)
 
+### How to improve
+We can just remove redis dependencies, Sessions objects from controller, and store the tokens and refresh tokens in localStorage instead of redis
 
 ### OAuth2 flux image from Micronaut
 
 ![oauth2 flux](https://micronaut-projects.github.io/micronaut-security/latest/img/standard-oauth.svg)
 
+### How to use
+At now, we have the /oauth/login endpoint. When you hit this endpoint you do your login and accept
+user-read scope. Spotify return a callback for /callback, so we validate our code and get the tokens.
+
+Now we just need to implement other endpoints like artists, songs, etc.
