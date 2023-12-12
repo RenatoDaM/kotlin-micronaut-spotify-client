@@ -16,7 +16,6 @@ import jakarta.inject.Singleton
 @Requires(classes = [TokenNotFoundException::class, ExceptionHandler::class])
 class TokenNotFoundExceptionHandler(private val jsonMapper: JsonMapper) : ExceptionHandler<TokenNotFoundException, HttpResponse<*>> {
     override fun handle(request: HttpRequest<Any>, exception: TokenNotFoundException): HttpResponse<ErrorResponse> {
-        println("passou no handler")
         val errorResponse = ErrorResponse(code = 400, message = "Token not found. Please do login again")
         return HttpResponse.badRequest<ErrorResponse>().body(errorResponse)
     }
